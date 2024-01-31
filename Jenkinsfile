@@ -25,23 +25,20 @@ pipeline {
         }
         stage ('Build Frontend') {
             steps {
-                dir('frontend') {
-                    bat 'mvn clean package -DskipTests=true'
-                }
+                bat 'cd frontend'
+                bat 'mvn clean package -DskipTests=true'
             }
         }
         stage ('Unit Tests Frontend') {
             steps {
-                dir('frontend') {
-                    bat 'mvn test'
-                }
+                bat 'cd frontend'
+                bat 'mvn test'
             }
         }
         stage ('Deploy Frontend') {
             steps {
-                dir('frontend') {
-                    deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://localhost:8001/')], contextPath: 'tasks', war: 'target/tasks-frontend.war'
-                }
+                bat 'cd frontend'
+                deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://localhost:8001/')], contextPath: 'tasks', war: 'target/tasks-frontend.war'
             }
         }
 
