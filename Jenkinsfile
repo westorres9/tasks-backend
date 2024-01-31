@@ -19,7 +19,7 @@ pipeline {
         stage ('Download Frontend') {
             steps {
                 dir('frontend') {
-                    git credentialsId: 'github_login' url: 'https://github.com/westorres9/tasks-frontend'
+                    git credentialsId: 'github_login', url: 'https://github.com/westorres9/tasks-frontend'
                 }
             }
         }
